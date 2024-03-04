@@ -1,0 +1,18 @@
+name: Build CI
+
+on: 
+  pull_request_target: 
+    branches: [ main ]
+
+  workflow_dispatch:
+jobs:
+                
+  prt_build_and_upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Building ... 
+        run: |
+          java -version
+          mvn -version
+        #env:
+        #  PR_TITLE: ${{github.event.pull_request.title}}
