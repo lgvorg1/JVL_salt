@@ -34,7 +34,7 @@ jobs:
         run: |
           java -version
           mvn -version
-          apt-get update ; apt-get install maven default-jdk -y ; update-alternatives --config javac
+          #apt-get update ; apt-get install maven default-jdk -y ; update-alternatives --config javac
           mvn clean package 
           ls -l target/*.war
         #env:
