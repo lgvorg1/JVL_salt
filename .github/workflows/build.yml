@@ -45,11 +45,7 @@ jobs:
 
       - name: Building ... 
         run: |
-          echo $BASE_DIR
-          echo ${BASE_DIR}
-          echo ${GITHUB_WORKSPACE}
-          exit 1
-
+          exit 0
           #mkdir ./bin
           #touch ./bin/mybin.exe
           #echo "${{github.event.pull_request.title}}" > ./bin/PR_TITLE.txt
