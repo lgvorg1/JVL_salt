@@ -160,7 +160,7 @@ jobs:
 
 
               cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
-              DIGEST=$(cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json | jq -r .subject)
+              DIGEST=$(cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json | jq -r .subject  )
               
 
               
