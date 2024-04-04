@@ -119,7 +119,7 @@ jobs:
           echo DIGEST_ATT $DIGEST
           DIGEST_CALC=$(sha256sum ./JavaVulnerableLab.war | cut -f1 -d ' ')
           echo DIGEST_CALC $DIGEST_CALC
-          SUBJECT_NAME=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json | base64 -d | jq -r .subject.name)
+          SUBJECT_NAME=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json | base64 -d | jq -r .subject)
           echo SUBJECT_NAME $SUBJECT_NAME
           echo ATT_ID && cat ./bin/att.id
           echo ====================================
