@@ -153,10 +153,10 @@ jobs:
                                     --key="${PRIVATE_KEY}" --public-key=${BASE_DIR}/Test1_public.pem --key-password=${KEY_PASSWD} \
                                     --output=${BASE_DIR}/${PIPELINE}_cli.signed.json \
                                     --output-unsigned=${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json \
-                                    --pretty-print
+                                    --pretty-print \
+                                    > ${GITHUB_WORKSPACE}/lgv.txt
         
                                     #--config=$SALT_PATH/conf/salt.yaml \
-                                    #cat ${WORKSPACE}/${PIPELINE}_cli.statement.json
 
 
               cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
