@@ -62,6 +62,8 @@ jobs:
         run: |
           unzip -o myartifact.zip
           ls -l
+          cat cli_attestattion_JVL_salt_unsigned.json
+
 
       - name: 'Verifying the attestation'
         run: |
