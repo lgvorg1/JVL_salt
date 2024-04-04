@@ -141,7 +141,7 @@ jobs:
               salt attestation add \
                                 --pipeline ${PIPELINE}_cli \
                                 --basedir ${BASE_DIR}/target \
-                                --name=JavaVulnerableLab.war --type product --file JavaVulnerableLab.war 
+                                --name=MyAppWar --type product --file JavaVulnerableLab.war 
 
               
               echo " "
