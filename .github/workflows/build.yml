@@ -158,8 +158,13 @@ jobs:
                                     #--config=$SALT_PATH/conf/salt.yaml \
                                     #cat ${WORKSPACE}/${PIPELINE}_cli.statement.json
 
+
               cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
+              cat ${BASE_DIR}/lgv.txt
+              echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               
+              grep "registry with id" lgv.txt | awk '{print $14}' > ./bin/att.id
+              cat ./bin/att.id
         
               
               
