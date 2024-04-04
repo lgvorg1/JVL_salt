@@ -121,7 +121,7 @@ jobs:
           echo DIGEST_CALC $DIGEST_CALC
           SUBJECT_NAME=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json | base64 -d | jq -r .subject)
           echo SUBJECT_NAME $SUBJECT_NAME
-          echo ATT_ID && cat ./bin/att.id
+          #echo ATT_ID && cat ./bin/att.id
           echo ====================================
 
 
