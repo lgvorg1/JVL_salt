@@ -46,6 +46,7 @@ jobs:
       - name: Building ... 
         run: |
           echo ${BASE_DIR}
+          echo ${GITHUB_WORKSPACE}
           exit 1
 
           #mkdir ./bin
