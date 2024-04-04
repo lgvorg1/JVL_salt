@@ -160,11 +160,13 @@ jobs:
 
 
               cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
+              
               cat ${BASE_DIR}/lgv.txt
               echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               
               grep "registry with id" lgv.txt | awk '{print $14}' > ./bin/att.id
               cat ./bin/att.id
+              cp ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json ./bin
         
               
               
