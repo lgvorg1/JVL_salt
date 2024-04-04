@@ -123,7 +123,7 @@ jobs:
               echo " "
               echo "----------- "
               echo "Compiling ... -------------------"
-              mkdir $(Build.SourcesDirectory)/bin
+              mkdir ${BASE_DIR}/bin
               salt attestation run \
                             --step=compile \
                             --pipeline ${PIPELINE}_cli \
@@ -139,7 +139,7 @@ jobs:
               cp target/JavaVulnerableLab.war ./bin
               salt attestation add \
                                 --pipeline ${PIPELINE}_cli \
-                                --basedir $(Build.SourcesDirectory)/target \
+                                --basedir ${BASE_DIR}/target \
                                 --name=my_product --type product --file JavaVulnerableLab.war 
 
               
