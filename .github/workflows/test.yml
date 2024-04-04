@@ -123,7 +123,7 @@ jobs:
           echo SUBJECT_NAME $SUBJECT_NAME
           echo ATT_ID && cat ./bin/att.id
           echo ====================================
-          exit 1
+
 
           #SHA_ATT_MATERIAL=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json | base64 -d | jq -r .predicate.attestations[0].predicate.materials[].digest[])
           #SHA_STEP_MATERIAL=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json | base64 -d | jq -r .predicate.attestations[3].predicate.materials[0].digest[])
