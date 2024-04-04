@@ -89,8 +89,9 @@ jobs:
           SHA_SUM=$(sha256sum ./JavaVulnerableLab.war | cut -f1 -d ' ')
           echo $SHA_SUM
           echo YYYYYYYYYYYYYYYYYYYYYYYYYYY
-          #ATT_ID=$(echo $(salt -q registry search --digest sha256:$SHA_SUM --format json) | jq -r .[-1].gitoidSha256)
+          ATT_ID=$(echo $(salt -q registry search --digest sha256:$SHA_SUM --format json) | jq -r .[-1].gitoidSha256)
           echo "ATT_ID: $ATT_ID"
+          echo ZZZZZZZZZZZZZZZZZZZZZZZZZZZ
 
 
           echo " "
