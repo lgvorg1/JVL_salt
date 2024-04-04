@@ -13,6 +13,29 @@ jobs:
     steps:
 
 
+      
+
+
+      - name: Checking out PR code
+        uses: actions/checkout@v4
+        if: ${{ github.event_name == 'pull_request_target' }}
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: '0'
+          # This is to get the PR code instead of the repo code
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+        name: Checking out main code
+        #if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: '0'
+
+
       - name: 'Download artifact'
         uses: actions/github-script@v6
         with:
@@ -34,25 +57,6 @@ jobs:
             let fs = require('fs');
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/myartifact.zip`, Buffer.from(download.data));
 
-
-      - name: Checking out PR code
-        uses: actions/checkout@v4
-        if: ${{ github.event_name == 'pull_request_target' }}
-        with:
-          # Number of commits to fetch. 0 indicates all history for all branches and tags.
-          # Default: 1
-          fetch-depth: '0'
-          # This is to get the PR code instead of the repo code
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-        name: Checking out main code
-        #if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-        with:
-          # Number of commits to fetch. 0 indicates all history for all branches and tags.
-          # Default: 1
-          fetch-depth: '0'
 
       - name: 'Unzip artifact'
         run: |
