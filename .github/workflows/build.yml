@@ -141,7 +141,7 @@ jobs:
               salt attestation add \
                                 --pipeline ${PIPELINE}_cli \
                                 --basedir ${BASE_DIR}/target \
-                                --name=my_top_product --type product --file JavaVulnerableLab.war 
+                                --name=my_war --type product --file JavaVulnerableLab.war 
 
               
               echo " "
@@ -160,6 +160,9 @@ jobs:
 
 
               cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
+              DIGEST=$(cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json | jq -r .subject.digest.sha256)
+              
+
               
               cat ${BASE_DIR}/lgv.txt
               echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -167,6 +170,11 @@ jobs:
               grep "registry with id" lgv.txt | awk '{print $14}' > ./bin/att.id
               cat ./bin/att.id
               cp ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json ./bin
+              
+              echo ====================================
+              echo DIGEST $DIGEST
+              echo ATT_ID && cat ./bin/att.id
+              echo ====================================
         
               
               
