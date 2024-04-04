@@ -159,7 +159,7 @@ jobs:
                                     #cat ${WORKSPACE}/${PIPELINE}_cli.statement.json
 
               cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
-              exit 1
+              
         
               
               
