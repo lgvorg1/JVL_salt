@@ -17,7 +17,7 @@ env:
   KEY_PASSWD: ${{ secrets.KEY_PASSWD }}
   API_KEY: ${{ secrets.XY_TOKEN_PRO }}
   OTRA_VAR: "hola"
-  BASE_DIR: ${GITHUB_WORKSPACE}
+  BASE_DIR: ${{ GITHUB_WORKSPACE }}
   
 jobs:
                 
@@ -45,6 +45,9 @@ jobs:
 
       - name: Building ... 
         run: |
+          echo ${BASE_DIR}
+          exit 1
+          
           #mkdir ./bin
           #touch ./bin/mybin.exe
           #echo "${{github.event.pull_request.title}}" > ./bin/PR_TITLE.txt
