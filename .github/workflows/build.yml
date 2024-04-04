@@ -13,8 +13,8 @@ env:
 
   XY_PRJ_NAME: LGV-GH-${{ github.event.repository.name }}
   PIPELINE: ${{ github.event.repository.name }}
-  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-  KEY_PASSWD: ${{ secrets.KEY_PASSWD }}
+  PRIVATE_KEY: ${{ secrets.SALT_PRIVATE_KEY }}
+  KEY_PASSWD: ${{ secrets.SALT_PRIVATE_KEY_PASSWD }}
   API_KEY: ${{ secrets.XY_TOKEN_PRO }}
   OTRA_VAR: "hola"
   BASE_DIR: ${{ github.workspace }}
