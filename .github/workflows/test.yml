@@ -114,7 +114,7 @@ jobs:
           #echo "RES-------"$RES"--------"
 
           echo ====================================
-          DIGEST=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json | base64 -d | jq -r .subject.digest.sha256)
+          DIGEST=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json | base64 -d | jq -r .subject)
           
           echo DIGEST_ATT $DIGEST
           DIGEST_CALC=$(sha256sum ./JavaVulnerableLab.war | cut -f1 -d ' ')
