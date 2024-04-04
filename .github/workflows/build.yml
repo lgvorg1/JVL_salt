@@ -15,7 +15,7 @@ env:
   PIPELINE: ${{ github.event.repository.name }}
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
   KEY_PASSWD: ${{ secrets.KEY_PASSWD }}
-  API_KEY: ${{ secrets.XYGENI_TOKEN }}
+  API_KEY: ${{ secrets.XYGENI_TOKEN_PRO }}
   OTRA_VAR: "hola"
   
 jobs:
