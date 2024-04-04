@@ -160,7 +160,7 @@ jobs:
 
 
               cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
-              DIGEST=$(cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json | jq -r .subject.digest.sha256)
+              DIGEST=$(cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json | jq -r .subject)
               
 
               
@@ -170,7 +170,7 @@ jobs:
               grep "registry with id" lgv.txt | awk '{print $14}' > ./bin/att.id
               cat ./bin/att.id
               cp ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json ./bin
-              
+
               echo ====================================
               echo DIGEST $DIGEST
               echo ATT_ID && cat ./bin/att.id
