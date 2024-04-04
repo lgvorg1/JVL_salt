@@ -131,7 +131,7 @@ jobs:
                             --pretty-print \
                             --name my_sources --type material --file ${BASE_DIR}/src \
                             --name my_product --type product  --file ${BASE_DIR}/target/JavaVulnerableLab.war \
-                            -- mvn clean package
+                            -- mvn --no-transfer-progress clean package
  
 
               echo " "
