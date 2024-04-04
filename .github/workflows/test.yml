@@ -61,7 +61,7 @@ jobs:
       - name: 'Unzip artifact'
         run: |
           unzip -o myartifact.zip
-          ls -lR
+          ls -l
 
       - name: 'Verifying the attestation'
         run: |
@@ -85,7 +85,7 @@ jobs:
           #ls -l
           SHA_SUM=$(sha256sum ./JavaVulnerableLab.war | cut -f1 -d ' ')
           echo $SHA_SUM
-          ATT_ID=$(echo $(salt -q registry search --digest sha256:$SHA_SUM --format json) | jq -r .[-1].gitoidSha256)
+          #ATT_ID=$(echo $(salt -q registry search --digest sha256:$SHA_SUM --format json) | jq -r .[-1].gitoidSha256)
           echo "ATT_ID: $ATT_ID"
 
 
