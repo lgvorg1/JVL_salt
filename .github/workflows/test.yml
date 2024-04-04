@@ -100,7 +100,7 @@ jobs:
           echo "Downloading the provenance attestation ..." 
           salt -q reg get --id=$ATT_ID --format=json > ${GITHUB_WORKSPACE}/provenance_kk.signed.json
           cat ${GITHUB_WORKSPACE}/provenance_kk.signed.json
-          exit 1
+          
           
           # this is for provenance
           #WFR=$(jq -r .payload ${GITHUB_WORKSPACE}/provenance_kk.signed.json |base64 -d | jq -r .predicate.buildDefinition.internalParameters.environment.GITHUB_WORKFLOW_REF)
