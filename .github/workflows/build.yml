@@ -17,6 +17,7 @@ env:
   KEY_PASSWD: ${{ secrets.KEY_PASSWD }}
   API_KEY: ${{ secrets.XY_TOKEN_PRO }}
   OTRA_VAR: "hola"
+  BASE_DIR: ${GITHUB_WORKSPACE}
   
 jobs:
                 
@@ -102,7 +103,7 @@ jobs:
               #/home/luisgarcia/LGV/xygeni_salt/salt attestation init 
               salt attestation init \
                             --pipeline ${PIPELINE}_cli \
-                            --basedir ${GITHUB_WORKSPACE} \
+                            --basedir ${BASE_DIR} \
                             --attestor environment \
                             --attestor git
               
@@ -111,13 +112,13 @@ jobs:
               echo "Adding materials [src/$SRC_FILE]  to attestation ..."
               salt attestation add \
                             --pipeline ${PIPELINE}_cli \
-                            --basedir ${GITHUB_WORKSPACE} \
+                            --basedir ${BASE_DIR} \
                             --name=my_top_material --type material --file ./src  
 
               echo " "
               echo "-----------"
               echo "REMOVING binaries ... -------------------" 
-              rm -rf ${GITHUB_WORKSPACE}/bin
+              rm -rf ${BASE_DIR}/bin
 
               echo " "
               echo "----------- "
@@ -127,8 +128,8 @@ jobs:
                             --step=compile \
                             --pipeline ${PIPELINE}_cli \
                             --pretty-print \
-                            --name my_sources --type material --file $(Build.SourcesDirectory)/src \
-                            --name my_product --type product  --file $(Build.SourcesDirectory)/target/JavaVulnerableLab.war \
+                            --name my_sources --type material --file ${BASE_DIR}/src \
+                            --name my_product --type product  --file ${BASE_DIR}/target/JavaVulnerableLab.war \
                             -- mvn clean package
  
 
@@ -148,15 +149,15 @@ jobs:
               salt attestation commit \
                                     --project SALT \
                                     --pipeline ${PIPELINE}_cli \
-                                    --key="${PRIVATE_KEY}" --public-key=${GITHUB_WORKSPACE}/Test1_public.pem --key-password=${KEY_PASSWD} \
-                                    --output=${GITHUB_WORKSPACE}/${PIPELINE}_cli.signed.json \
-                                    --output-unsigned=${GITHUB_WORKSPACE}/cli_attestattion_${PIPELINE}_unsigned.json \
+                                    --key="${PRIVATE_KEY}" --public-key=${BASE_DIR}/Test1_public.pem --key-password=${KEY_PASSWD} \
+                                    --output=${BASE_DIR}/${PIPELINE}_cli.signed.json \
+                                    --output-unsigned=${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json \
                                     --pretty-print
         
                                     #--config=$SALT_PATH/conf/salt.yaml \
                                     #cat ${WORKSPACE}/${PIPELINE}_cli.statement.json
 
-              cat ${GITHUB_WORKSPACE}/cli_attestattion_${PIPELINE}_unsigned.json 
+              cat ${BASE_DIR}/cli_attestattion_${PIPELINE}_unsigned.json 
               exit 1
         
               
@@ -177,15 +178,15 @@ jobs:
               echo "Generating Provenance with CLI ..."
               #$SALT_PATH/salt at provenance 
               salt at slsa \
-                  --basedir ${GITHUB_WORKSPACE} \
-                  --key="${PRIVATE_KEY}" --public-key=${GITHUB_WORKSPACE}/Test1_public.pem --key-password=${KEY_PASSWD} \
-                  --output-unsigned=${GITHUB_WORKSPACE}/cli_provenance_${PIPELINE}_unsigned.json \
+                  --basedir ${BASE_DIR} \
+                  --key="${PRIVATE_KEY}" --public-key=${BASE_DIR}/Test1_public.pem --key-password=${KEY_PASSWD} \
+                  --output-unsigned=${BASE_DIR}/cli_provenance_${PIPELINE}_unsigned.json \
                   --pipeline ${PIPELINE} --pretty-print \
                   --file ./bin/bin.zip \
-                  > ${GITHUB_WORKSPACE}/lgv.txt
+                  > ${BASE_DIR}/lgv.txt
       
-              cat ${GITHUB_WORKSPACE}/cli_provenance_${PIPELINE}_unsigned.json
-              cat ${GITHUB_WORKSPACE}/lgv.txt
+              cat ${BASE_DIR}/cli_provenance_${PIPELINE}_unsigned.json
+              cat ${BASE_DIR}/lgv.txt
               echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
               
               grep "registry with id" lgv.txt | awk '{print $14}' > ./bin/att.id
