@@ -64,10 +64,11 @@ jobs:
           echo Executing Xygeni scan ....    
           ${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download \
                 --run="inventory,deps,misconf,codetamper" \
-                --sbom=${BASE_DIR}/sbom.cyclonedx.json --sbom-format=cyclonedx \
+                --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx \
                 -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
 
           ls -ltr
+          cat ${BASE_DIR}/sbom_cyclonedx.json
           exit 1
           
         env:
