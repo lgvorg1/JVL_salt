@@ -177,10 +177,7 @@ jobs:
                               --pretty-print \
                               --name my_manifest --type material --file ${BASE_DIR}/src/pom.xml \
                               --name my_sbom --type product  --file ${BASE_DIR}/sbom_cyclonedx.json \
-                              -- ${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download \
-                                  --run="inventory,deps,misconf,codetamper" \
-                                  --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx \
-                                  -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
+                              -- ${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download --run="inventory,deps,misconf,codetamper" --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
 
               echo " "
               echo "-----------"
