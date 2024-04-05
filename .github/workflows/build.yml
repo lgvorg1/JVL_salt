@@ -11,6 +11,11 @@ env:
   GITHUB_PAT: ${{ secrets.GH_PAT }}
   PR_ID: ${{github.event.number}}
 
+  XY_USERNAME: ${{ secrets.XY_USERNAME_PRO }}
+  XY_PASSWORD: ${{ secrets.XY_PASSWORD_PRO }}
+  XY_TOKEN: ${{ secrets.XY_TOKEN_PRO }}
+  XY_URL: ${{ secrets.XY_URL_PRO }}
+
   XY_PRJ_NAME: LGV-GH-${{ github.event.repository.name }}
   PIPELINE: ${{ github.event.repository.name }}
   PRIVATE_KEY: ${{ secrets.SALT_PRIVATE_KEY }}
@@ -42,6 +47,26 @@ jobs:
           # Number of commits to fetch. 0 indicates all history for all branches and tags.
           # Default: 1
           fetch-depth: '0'
+
+      
+      - name: Download Xygeni Scanner 
+        run: |
+          echo Downloading Xygeni Scanner ....
+          curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
+          cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml | grep changeTypesToConsider
+          sed -i 's/changeTypesToConsider: M/changeTypesToConsider: AM/g' ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml
+          cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml | grep changeTypesToConsider
+
+      # Runs a set of commands using the runners shell
+      - name: Execution Xygeni Scanner (vuln)
+        run: |
+          echo Executing Xygeni scan ....    
+          ${GITHUB_WORKSPACE}/scanner/xygeni scan --never-fail -f none --run="inventory,misconf,codetamper" --no-conf-download -n ${{ env.XY_PRJ_NAME }} --dir ${GITHUB_WORKSPACE} -e **/scanner/**
+        env:
+          GITHUB_PAT: ${{ secrets.GH_PAT }}
+
+          
+
 
       - name: Building ... 
         run: |
