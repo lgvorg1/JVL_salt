@@ -195,7 +195,7 @@ jobs:
                               salt attestation add \
                                 --pipeline ${PIPELINE}_cli \
                                 --basedir ${BASE_DIR} \
-                                -n xygeni-sbom -t predicate -f ${BASE_DIR}/deps.kk.json \
+                                -n xygeni-vulns -t predicate -f ./deps.kk.json \
                                 --predicate-type https://in-toto.io/attestation/vulns
 
               echo " "
