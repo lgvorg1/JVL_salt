@@ -192,6 +192,9 @@ jobs:
                               #  -n xygeni-sbom -t predicate -f ${BASE_DIR}/sbom_cyclonedx.json \
                               #  --predicate-type https://cyclonedx.org/bom
 
+                              echo " "
+                              echo "------------"
+                              echo "Adding Xygeni scan vulns to attestation ..."
                               salt attestation add \
                                 --pipeline ${PIPELINE}_cli \
                                 --basedir ${BASE_DIR} \
@@ -202,12 +205,17 @@ jobs:
               echo "-----------"
               echo "Adding product [bin/$BIN_FILE] to attestation ..."
               cp target/JavaVulnerableLab.war ./bin
-              salt attestation add \
+              salt -nb attestation add \
                                 --pipeline ${PIPELINE}_cli \
                                 --basedir ${BASE_DIR}/target \
                                 --name=MyAppWar --type product --file JavaVulnerableLab.war 
 
-              
+              echo " "
+              echo "------------"
+              echo "Commiting the drafted attestation using provided keys ..."
+              salt -nb attestation status -p ${PIPELINE}_cli --full
+
+
               echo " "
               echo "------------"
               echo "Commiting the drafted attestation using provided keys ..."
