@@ -212,7 +212,7 @@ jobs:
 
               echo " "
               echo "------------"
-              echo "Commiting the drafted attestation using provided keys ..."
+              echo "Checking the status of the drafted attestation  ..."
               salt -nb attestation status -p ${PIPELINE}_cli --full
 
 
