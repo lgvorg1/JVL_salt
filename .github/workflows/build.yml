@@ -179,6 +179,15 @@ jobs:
                               --name my_sbom --type product  --file ${BASE_DIR}/sbom_cyclonedx.json \
                               -- ${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download --run="inventory,deps,misconf,codetamper" --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
 
+
+                              salt attestatation add \
+                                --pipeline ${PIPELINE}_cli \
+                                --basedir ${BASE_DIR} \
+                                -n xygeni-sbom -t predicate -f ${BASE_DIR}/sbom_cyclonedx.json \
+                                --predicate-type https://cyclonedx.org/bom
+                                
+                                # --predicate-type https://in-toto.io/attestation/vulns
+
               echo " "
               echo "-----------"
               echo "Adding product [bin/$BIN_FILE] to attestation ..."
