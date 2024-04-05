@@ -11,10 +11,10 @@ env:
   GITHUB_PAT: ${{ secrets.GH_PAT }}
   PR_ID: ${{github.event.number}}
 
-  XY_USERNAME: ${{ secrets.XY_USERNAME_DEMO }}
-  XY_PASSWORD: ${{ secrets.XY_PASSWORD_DEMO }}
-  XY_URL: ${{ secrets.XY_URL_DEMO }}
-  XY_TOKEN: ${{ secrets.XY_TOKEN_DEMO }}
+  XY_USERNAME: ${{ secrets.XY_USERNAME_PRO }}
+  XY_PASSWORD: ${{ secrets.XY_PASSWORD_PRO }}
+  XY_URL: ${{ secrets.XY_URL_PRO }}
+  XY_TOKEN: ${{ secrets.XY_TOKEN_PRO }}
 
   XY_PRJ_NAME: LGV-GH-${{ github.event.repository.name }}
   PIPELINE: ${{ github.event.repository.name }}
@@ -61,14 +61,20 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Execution Xygeni Scanner (vuln)
         run: |
-          exit 0
+
           echo Executing Xygeni scan ....    
-          ${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download \
+          #${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download \
+          #      --run="inventory,deps,misconf,codetamper" \
+          #      --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx \
+          #      -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
+
+          ${BASE_DIR}/scanner/xygeni scan --never-fail -f json -o kk.json --no-conf-download \
                 --run="inventory,deps,misconf,codetamper" \
                 --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx \
-                -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
+                -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**      
 
           ls -ltr
+          exit 1
           #cat ${BASE_DIR}/sbom_cyclonedx.json
           
         env:
