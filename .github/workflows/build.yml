@@ -14,8 +14,8 @@ env:
   XY_USERNAME: ${{ secrets.XY_USERNAME_DEMO }}
   XY_PASSWORD: ${{ secrets.XY_PASSWORD_DEMO }}
   XY_URL: ${{ secrets.XY_URL_DEMO }}
+  XY_TOKEN: ${{ secrets.XY_TOKEN_DEMO }}
 
-  XY_TOKEN: ${{ secrets.XY_TOKEN_PRO }}
   XY_PRJ_NAME: LGV-GH-${{ github.event.repository.name }}
   PIPELINE: ${{ github.event.repository.name }}
   PRIVATE_KEY: ${{ secrets.SALT_PRIVATE_KEY }}
@@ -56,7 +56,9 @@ jobs:
           #chmod +x ./install.sh
           #./install.sh -o -v -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
 
-          curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
+          #curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
+          curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $XY_TOKEN -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
+          
           cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml | grep changeTypesToConsider
           sed -i 's/changeTypesToConsider: M/changeTypesToConsider: AM/g' ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml
           cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml | grep changeTypesToConsider
