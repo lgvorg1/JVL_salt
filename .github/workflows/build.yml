@@ -74,7 +74,7 @@ jobs:
                 -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**      
 
           ls -ltr
-          exit 1
+          
           #cat ${BASE_DIR}/sbom_cyclonedx.json
           
         env:
