@@ -51,7 +51,8 @@ jobs:
       
       - name: Download Xygeni Scanner 
         run: |
-          echo Downloading Xygeni Scanner ....
+          echo Downloading Xygeni Scanner .....
+          curl -L https://get.xygeni.io/latest/scanner/install.sh 
           curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -u $XY_USERNAME -p $XY_PASSWORD -s $XY_URL -d ${GITHUB_WORKSPACE}/scanner 
           cat ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml | grep changeTypesToConsider
           sed -i 's/changeTypesToConsider: M/changeTypesToConsider: AM/g' ${GITHUB_WORKSPACE}/scanner/conf/codetampering/ccm/workflow_modification.yml
@@ -65,7 +66,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
 
-          
+
 
 
       - name: Building ... 
