@@ -175,33 +175,33 @@ jobs:
  
               
 
-                echo "----------- "
-                echo "Generating SBOM ... -------------------"
-                salt attestation run \
-                              --step=GenerateSBOM \
-                              --pipeline ${PIPELINE}_cli \
-                              --pretty-print \
-                              --name my_manifest --type material --file ${BASE_DIR}/pom.xml \
-                              --name my_sbom --type product  --file ${BASE_DIR}/sbom_cyclonedx.json \
-                              -- ${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download --run="inventory,deps,misconf,codetamper" --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
+                # echo "----------- "
+                # echo "Generating SBOM ... -------------------"
+                # salt attestation run \
+                #               --step=GenerateSBOM \
+                #               --pipeline ${PIPELINE}_cli \
+                #               --pretty-print \
+                #               --name my_manifest --type material --file ${BASE_DIR}/pom.xml \
+                #               --name my_sbom --type product  --file ${BASE_DIR}/sbom_cyclonedx.json \
+                #               -- ${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download --run="inventory,deps,misconf,codetamper" --sbom=${BASE_DIR}/sbom_cyclonedx.json --sbom-format=cyclonedx -n ${{ env.XY_PRJ_NAME }} --dir ${BASE_DIR} -e **/scanner/**
 
-                              echo " "
-                              echo "------------"
-                              echo "Adding Xygeni sbom to attestation ..."
-                              salt attestation add \
-                                --pipeline ${PIPELINE}_cli \
-                                --basedir ${BASE_DIR} \
-                                -n xygeni-sbom -t predicate -f ./sbom_cyclonedx.json \
-                                --predicate-type https://cyclonedx.org/bom
+                #               echo " "
+                #               echo "------------"
+                #               echo "Adding Xygeni sbom to attestation ..."
+                #               salt attestation add \
+                #                 --pipeline ${PIPELINE}_cli \
+                #                 --basedir ${BASE_DIR} \
+                #                 -n xygeni-sbom -t predicate -f ./sbom_cyclonedx.json \
+                #                 --predicate-type https://cyclonedx.org/bom
 
-                              echo " "
-                              echo "------------"
-                              echo "Adding Xygeni scan vulns to attestation ..."
-                              salt attestation add \
-                                --pipeline ${PIPELINE}_cli \
-                                --basedir ${BASE_DIR} \
-                                -n xygeni-vulns -t predicate -f ./deps.kk.json \
-                                --predicate-type https://in-toto.io/attestation/vulns
+                #               echo " "
+                #               echo "------------"
+                #               echo "Adding Xygeni scan vulns to attestation ..."
+                #               salt attestation add \
+                #                 --pipeline ${PIPELINE}_cli \
+                #                 --basedir ${BASE_DIR} \
+                #                 -n xygeni-vulns -t predicate -f ./deps.kk.json \
+                #                 --predicate-type https://in-toto.io/attestation/vulns
 
               echo " "
               echo "-----------"
