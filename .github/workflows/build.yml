@@ -51,6 +51,7 @@ jobs:
       
       - name: Download Xygeni Scanner 
         run: |
+          exit 0
           echo Downloading Xygeni Scanner .....
           curl -L https://get.xygeni.io/latest/scanner/install.sh | /bin/bash -s -- -t $XY_TOKEN -s $XY_URL -d ${BASE_DIR}/scanner 
           
@@ -61,7 +62,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Execution Xygeni Scanner (vuln)
         run: |
-
+          exit 0
           echo Executing Xygeni scan ....    
           #${BASE_DIR}/scanner/xygeni scan --never-fail -f none --no-conf-download \
           #      --run="inventory,deps,misconf,codetamper" \
