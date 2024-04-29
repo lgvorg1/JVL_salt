@@ -26,7 +26,6 @@ env:
   PRIVATE_KEY: ${{ secrets.SALT_PRIVATE_KEY }}
   KEY_PASSWD: ${{ secrets.SALT_PRIVATE_KEY_PASSWD }}
   API_KEY: ${{ secrets.XY_TOKEN_PRO }}
-  OTRA_VAR: "hola"
   BASE_DIR: ${{ github.workspace }}
 
   MODIFY_SOURCES: ${{ github.event.inputs.mod-source }}
