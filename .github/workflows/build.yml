@@ -162,6 +162,9 @@ jobs:
               echo "REMOVING binaries ... -------------------" 
               rm -rf ${BASE_DIR}/bin
 
+
+              cp ./AddPage_mod.java ./src/main/java/org/cysecurity/cspf/jvl/controller/AddPage.java
+
               echo " "
               echo "----------- "
               echo "Compiling ... -------------------"
