@@ -5,6 +5,11 @@ on:
     branches: [ main ]
 
   workflow_dispatch:
+    inputs:
+      mod-source:
+          type: boolean
+          description: Modify sources
+          default: false
 
 env:
   MY_SECRET: ${{ secrets.MY_SECRET }}
@@ -23,6 +28,8 @@ env:
   API_KEY: ${{ secrets.XY_TOKEN_PRO }}
   OTRA_VAR: "hola"
   BASE_DIR: ${{ github.workspace }}
+
+  MODIFY_SOURCES: ${{ github.event.inputs.mod-source }}
   
 jobs:
                 
@@ -162,6 +169,16 @@ jobs:
               echo "REMOVING binaries ... -------------------" 
               rm -rf ${BASE_DIR}/bin
 
+
+              
+              if [ "$MODIFY_SOURCES" == "true" ]; then
+                echo " "
+                echo "-----------"
+                echo "Tampering with source code AFTER checkout and BEFORE compilation"
+                cp ./AddPage_mod.java ./src/main/java/org/cysecurity/cspf/jvl/controller/AddPage.java
+              else                 
+                echo " "
+              fi
 
               cp ./AddPage_mod.java ./src/main/java/org/cysecurity/cspf/jvl/controller/AddPage.java
 
