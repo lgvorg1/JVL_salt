@@ -10,22 +10,31 @@ on:
           type: boolean
           description: Modify sources
           default: false
+      xy-env:
+          type: choice
+          description: Xygeni Env
+          options: 
+          - PRO
+          - DEMO
+          - PARTNERS
+          default: PRO
+ 
 
 env:
   MY_SECRET: ${{ secrets.MY_SECRET }}
   GITHUB_PAT: ${{ secrets.GH_PAT }}
   PR_ID: ${{github.event.number}}
 
-  XY_USERNAME: ${{ secrets.XY_USERNAME_PRO }}
-  XY_PASSWORD: ${{ secrets.XY_PASSWORD_PRO }}
-  XY_URL: ${{ secrets.XY_URL_PRO }}
-  XY_TOKEN: ${{ secrets.XY_TOKEN_PRO }}
+  #XY_USERNAME: ${{ secrets.XY_USERNAME_PRO }}
+  #XY_PASSWORD: ${{ secrets.XY_PASSWORD_PRO }}
+  #XY_URL: ${{ secrets.XY_URL_PRO }}
+  #XY_TOKEN: ${{ secrets.XY_TOKEN_PRO }}
 
   XY_PRJ_NAME: LGV-GH-${{ github.event.repository.name }}
   PIPELINE: ${{ github.event.repository.name }}
   PRIVATE_KEY: ${{ secrets.SALT_PRIVATE_KEY }}
   KEY_PASSWD: ${{ secrets.SALT_PRIVATE_KEY_PASSWD }}
-  API_KEY: ${{ secrets.XY_TOKEN_PRO }}
+  #API_KEY: ${{ secrets.XY_TOKEN_PRO }}
   BASE_DIR: ${{ github.workspace }}
 
   MODIFY_SOURCES: ${{ github.event.inputs.mod-source }}
@@ -54,6 +63,43 @@ jobs:
           # Default: 1
           fetch-depth: '0'
 
+      - name: Set Xygeni env 
+        run: |
+
+          case "$XY_ENV" in 
+            PRO)
+              echo "PRO"
+              echo XY_USERNAME=${{ secrets.XY_USERNAME_PRO }} >> $GITHUB_ENV
+              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_PRO }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
+              echo API_KEY=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
+              ;;
+            DEMO)
+              echo "DEMO"
+              echo XY_USERNAME=${{ secrets.XY_USERNAME_DEMO }} >> $GITHUB_ENV
+              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_DEMO }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_DEMO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_DEMO }} >> $GITHUB_ENV
+              echo API_KEY=${{ secrets.XY_TOKEN_DEMO }} >> $GITHUB_ENV
+              ;;
+            PARTNERS)
+              echo "PARTNERS"
+              echo XY_USERNAME=${{ secrets.XY_USERNAME_PARTNERS }} >> $GITHUB_ENV
+              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_PARTNERS }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_PARTNERS }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_PARTNERS }} >> $GITHUB_ENV
+              echo API_KEY=${{ secrets.XY_TOKEN_PARTNERS }} >> $GITHUB_ENV
+              ;;
+            *)
+              echo "DEFAULT (PRO)"
+              echo XY_USERNAME=${{ secrets.XY_USERNAME_PRO }} >> $GITHUB_ENV
+              echo XY_PASSWORD=${{ secrets.XY_PASSWORD_PRO }} >> $GITHUB_ENV
+              echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
+              echo XY_TOKEN=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
+              echo API_KEY=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
+              ;;
+          esac
       
       - name: Download Xygeni Scanner 
         run: |
