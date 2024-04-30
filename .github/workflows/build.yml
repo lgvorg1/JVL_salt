@@ -64,7 +64,8 @@ jobs:
           fetch-depth: '0'
 
       - name: Set Xygeni env 
-        env: XY_ENV: ${{ github.event_name == 'push' && 'PRO' || github.event.inputs.xy-env }}
+        env: 
+          XY_ENV: ${{ github.event_name == 'push' && 'PRO' || github.event.inputs.xy-env }}
         run: |
 
           case "$XY_ENV" in 
