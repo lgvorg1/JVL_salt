@@ -132,8 +132,8 @@ jobs:
           else                 
               echo Salt - Attestations FAILED !!
               echo Salt - Materials are different !!
-              mw="Attestation Falied"
-              text="Materials are different  !!!! "
+              mw="Attestation Failed"
+              text="Attestation Failed => Materials are different !!!! "
               #echo "::error file=app.js,line=10,col=15::$text"
               echo "::error $mw::$text"
               exit 1
