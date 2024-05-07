@@ -223,8 +223,16 @@ jobs:
                 echo "-----------"
                 echo "Tampering with source code AFTER checkout and BEFORE compilation"
                 cp ./AddPage_mod.java ./src/main/java/org/cysecurity/cspf/jvl/controller/AddPage.java
+                mw="xxxxxx"
+                text="Tampering with source code AFTER checkout and BEFORE compilation !!!! "
+                #echo "::error file=app.js,line=10,col=15::$text"
+                echo "::info $mw::$text"
               else                 
                 echo " "
+                mw="xxxxxx"
+                text="Compiling real code !!!! "
+                #echo "::error file=app.js,line=10,col=15::$text"
+                echo "::info $mw::$text"
               fi
 
 
