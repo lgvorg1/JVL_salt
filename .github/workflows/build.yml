@@ -76,6 +76,7 @@ jobs:
               echo XY_URL=${{ secrets.XY_URL_PRO }} >> $GITHUB_ENV
               echo XY_TOKEN=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
               echo API_KEY=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
+              echo XYGENI_TOKEN=${{ secrets.XY_TOKEN_PRO }} >> $GITHUB_ENV
               ;;
             DEMO)
               echo "DEMO"
